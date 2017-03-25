@@ -10,6 +10,7 @@ function pixelPainter() {
     var rowNumber = 0;
     for(var i=0; i<size; i++){
       var newButton = document.createElement( 'button' );
+      newButton.className = 'button';
       newButton.id = "button"+rows+i;
       newButton.style.backgroundColor = 'white';
       grid.appendChild(newButton);
@@ -49,33 +50,50 @@ function pixelPainter() {
     var newButton5 = document.createElement( 'button' );
     newButton5.id = 'white';
     newButton5.className = 'color';
+    newButton5.innerHTML = 'clear';
     newButton5.style.backgroundColor ='white';
     newDiv.appendChild(newButton5);
+    var newButton6 = document.createElement( 'button' );
+    newButton6.id = 'clear all';
+    newButton6.className = 'color';
+    newButton6.id = 'clear';
+    newButton6.innerHTML = 'clear';
+    newButton6.style.backgroundColor ='white';
+    newDiv.appendChild(newButton6);
+    }
 
-
-
-
-
-  }
   // saves pixel Color to currentColor on click
   function selectColor(){
     var choose = document.addEventListener('click', function(e) {
     if( e.target.className === 'color'){
       currentColor = e.target.id;
-
-    console.log( currentColor + 'selected!');
-    }});
+      console.log( currentColor + 'selected!');
+    }
+   });
   }
 
     // applies currentColor to pixel on click
   function changeColor (  ){
     var choose = document.addEventListener( 'click', function(e) {
-      if( e.target.className !== 'color'){
+      if( e.target.className !== 'color' && e.target.id !== 'clear'){
       currentPixel = e.target;
       console.log('this pix' + currentPixel);
       console.log(currentColor);
       currentPixel.style.backgroundColor = currentColor;
-    }
+      }
+      // sets all elements with class button to white
+      if( e.target.id === 'clear' ){
+        (function() {
+          var elements;
+          elements = document.getElementsByClassName( 'button' );
+          for ( var i=0; i < elements.length; i++ ){
+            elements[i].style.backgroundColor = 'white';
+          }
+        })();
+
+
+      }
+
   });
 
   }
