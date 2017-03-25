@@ -27,37 +27,49 @@ function pixelPainter() {
     // creates color div/button
   function colorDiv() {
     var newDiv = grid.appendChild(document.createElement ( 'div' ) );
+
+    var selected = document.createElement( 'button' );
+    selected.id = 'selected';
+    selected.className = 'color';
+    selected.innerHTML = 'CURRENT COLOR';
+    selected.style.backgroundColor = currentColor;
+    newDiv.appendChild(selected);
+
     var newButton = document.createElement( 'button' );
     newButton.id = 'blue';
     newButton.className = 'color';
     newButton.style.backgroundColor = 'blue';
+    newButton.innerHTML = 'BLUE';
     newDiv.appendChild(newButton);
     var newButton2 = document.createElement( 'button' );
     newButton2.id = 'red';
     newButton2.className = 'color';
     newButton2.style.backgroundColor ='red';
+    newButton2.innerHTML = 'RED';
     newDiv.appendChild(newButton2);
     var newButton3 = document.createElement( 'button' );
     newButton3.id = 'green';
     newButton3.className = 'color';
     newButton3.style.backgroundColor ='green';
+    newButton3.innerHTML = 'GREEN';
     newDiv.appendChild(newButton3);
     var newButton4 = document.createElement( 'button' );
     newButton4.id = 'orange';
     newButton4.className = 'color';
     newButton4.style.backgroundColor ='orange';
+    newButton4.innerHTML = 'ORANGE';
     newDiv.appendChild(newButton4);
     var newButton5 = document.createElement( 'button' );
     newButton5.id = 'white';
     newButton5.className = 'color';
-    newButton5.innerHTML = 'clear';
+    newButton5.innerHTML = 'CLEAR';
     newButton5.style.backgroundColor ='white';
     newDiv.appendChild(newButton5);
     var newButton6 = document.createElement( 'button' );
-    newButton6.id = 'clear all';
+    newButton6.id = 'clear';
     newButton6.className = 'color';
     newButton6.id = 'clear';
-    newButton6.innerHTML = 'clear';
+    newButton6.innerHTML = 'CLEAR ALL';
     newButton6.style.backgroundColor ='white';
     newDiv.appendChild(newButton6);
     }
@@ -68,6 +80,8 @@ function pixelPainter() {
     if( e.target.className === 'color'){
       currentColor = e.target.id;
       console.log( currentColor + 'selected!');
+      document.getElementById( 'selected' );
+      selected.style.backgroundColor = currentColor;
     }
    });
   }
