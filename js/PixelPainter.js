@@ -93,8 +93,10 @@ function pixelPainter() {
       currentPixel = e.target;
       console.log('this pix' + currentPixel);
       console.log(currentColor);
+      if(currentPixel.className === 'button'){
       currentPixel.style.backgroundColor = currentColor;
       }
+    }
       // sets all elements with class button to white
       if( e.target.id === 'clear' ){
         (function() {
