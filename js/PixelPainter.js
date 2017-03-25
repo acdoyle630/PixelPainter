@@ -2,7 +2,7 @@ var grid = document.getElementById('pixelPainter');
 
 
 function pixelPainter() {
-  var size = 10;
+  var size = 100;
   var rows = 0;
   var currentPixel = null;
   currentColor = null;
@@ -11,6 +11,7 @@ function pixelPainter() {
     for(var i=0; i<size; i++){
       var newButton = document.createElement( 'button' );
       newButton.id = "button"+rows+i;
+      newButton.style.backgroundColor = 'white';
       grid.appendChild(newButton);
       }
   }
@@ -45,6 +46,13 @@ function pixelPainter() {
     newButton4.className = 'color';
     newButton4.style.backgroundColor ='orange';
     newDiv.appendChild(newButton4);
+    var newButton5 = document.createElement( 'button' );
+    newButton5.id = 'white';
+    newButton5.className = 'color';
+    newButton5.style.backgroundColor ='white';
+    newDiv.appendChild(newButton5);
+
+
 
 
 

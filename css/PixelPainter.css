@@ -3,6 +3,11 @@ table {
 }
 
 button {
+  height: 10px;
+  width: 10px;
+}
+
+.color{
   height: 100px;
   width: 100px;
 }
