@@ -6,6 +6,9 @@ function pixelPainter() {
   var rows = 0;
   var currentPixel = null;
   currentColor = null;
+  var drag = false;
+
+  // creates buttons for div row
   function createTableRow( ){
     var rowNumber = 0;
     for(var i=0; i<size; i++){
@@ -13,6 +16,19 @@ function pixelPainter() {
       newButton.className = 'button';
       newButton.id = "button"+rows+i;
       newButton.style.backgroundColor = 'white';
+      newButton.addEventListener('mousedown', function(){
+        drag = true;
+        this.style.backgroundColor = currentColor;
+        console.log(drag);
+      });
+      newButton.addEventListener('mouseover', function(){
+        if(drag === true){
+        this.style.backgroundColor = currentColor;
+        }
+      });
+      newButton.addEventListener('mouseup', function(){
+        drag = false;
+      });
       grid.appendChild(newButton);
       }
   }
@@ -68,7 +84,6 @@ function pixelPainter() {
     var newButton6 = document.createElement( 'button' );
     newButton6.id = 'clear';
     newButton6.className = 'color';
-    newButton6.id = 'clear';
     newButton6.innerHTML = 'CLEAR ALL';
     newButton6.style.backgroundColor ='white';
     newDiv.appendChild(newButton6);
@@ -83,11 +98,43 @@ function pixelPainter() {
       document.getElementById( 'selected' );
       selected.style.backgroundColor = currentColor;
     }
+    // Runs clear all function
+    if( e.target.id === 'clear'){
+      (function() {
+        var elements;
+          elements = document.getElementsByClassName( 'button' );
+          for ( var i=0; i < elements.length; i++ ){
+            elements[i].style.backgroundColor = 'white';
+          }
+      })();
+    }
    });
   }
 
+
+
+
+  /*function drag () {
+    var pix = [];
+    var flag = 0;
+    var choose = document.addEventListener( 'mousedown', function(e) {
+      pix.push(e.target);
+    });
+     var more = document.addEventListener( 'mouseover', function(e){
+      if( mousedown === true){
+      console.log(e.target);
+      pix.push(e.target);
+    }
+  });
+     var done = document.addEventListener( 'mouseup', function(e){
+      pix.push(e.target);
+    });
+
+    console.log(pix);
+  }*/
+
     // applies currentColor to pixel on click
-  function changeColor (  ){
+  /*function changeColor (  ){
     var choose = document.addEventListener( 'click', function(e) {
       if( e.target.className !== 'color' && e.target.id !== 'clear'){
       currentPixel = e.target;
@@ -112,19 +159,21 @@ function pixelPainter() {
 
   });
 
-  }
+  }*/
   return{
     createTableRow,
     colorDiv,
     createDiv,
-    changeColor,
+  //  changeColor,
     selectColor,
+  //  drag
   };
 }
 
 var render = pixelPainter();
 render.createTableRow();
 render.createDiv();
-render.changeColor();
+//render.changeColor();
 render.selectColor();
 render.colorDiv();
+//render.drag();
