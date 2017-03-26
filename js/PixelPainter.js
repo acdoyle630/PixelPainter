@@ -2,11 +2,12 @@ var grid = document.getElementById('pixelPainter');
 
 
 function pixelPainter() {
-  var size = 100;
+  var size = 10;
   var rows = 0;
   var currentPixel = null;
   currentColor = null;
   var drag = false;
+  brushSize = 1;
 
   // creates buttons for div row
   function createTableRow( ){
@@ -14,7 +15,8 @@ function pixelPainter() {
     for(var i=0; i<size; i++){
       var newButton = document.createElement( 'button' );
       newButton.className = 'button';
-      newButton.id = "button"+rows+i;
+      newButton.id = rows+i;
+      console.log(newButton.id);
       newButton.style.backgroundColor = 'white';
       newButton.addEventListener('mousedown', function(){
         drag = true;
@@ -31,11 +33,12 @@ function pixelPainter() {
       });
       grid.appendChild(newButton);
       }
+
   }
 
   function createDiv( ){
     for(var i=0; i<size; i++){
-    rows ++;
+    rows += size;
     grid.appendChild(document.createElement( 'div' ) );
     createTableRow(size);
     }
@@ -87,7 +90,18 @@ function pixelPainter() {
     newButton6.innerHTML = 'CLEAR ALL';
     newButton6.style.backgroundColor ='white';
     newDiv.appendChild(newButton6);
+
+    var newButton7 = document.createElement( 'button' );
+    newButton7.id = 'stamp';
+    newButton7.className = 'stamp';
+    newButton7.innerHTML = 'STAMP';
+    newButton7.style.backgroundColor ='white';
+    newDiv.appendChild(newButton7);
+    newButton7.addEventListener('click', function(){
+      stamp();
+    });
     }
+
 
   // saves pixel Color to currentColor on click
   function selectColor(){
@@ -111,69 +125,41 @@ function pixelPainter() {
    });
   }
 
+  function stamp (  ){
+    var stamp = [];
+    var brush = document.addEventListener('click', function(e) {
+      var next =((e.target.id));
+      test = Number(next) + size;
+      test2 = Number(next) - size;
+      test3 = Number(next) - 1;
+      test4 = Number(next) + 1;
+      var down1 = document.getElementById(test);
+      var up1 = document.getElementById(test2);
+      var right1 = document.getElementById(test3);
+      var left1 = document.getElementById(test4); // one below clicked button
+      (function() {
+        down1.style.backgroundColor = currentColor;
+        up1.style.backgroundColor = currentColor;
+        right1.style.backgroundColor = currentColor;
+        left1.style.backgroundColor = currentColor;
+        e.target.style.backgroundColor = currentcolor;
+      })();
+      //console.log(test );
 
-
-
-  /*function drag () {
-    var pix = [];
-    var flag = 0;
-    var choose = document.addEventListener( 'mousedown', function(e) {
-      pix.push(e.target);
     });
-     var more = document.addEventListener( 'mouseover', function(e){
-      if( mousedown === true){
-      console.log(e.target);
-      pix.push(e.target);
-    }
-  });
-     var done = document.addEventListener( 'mouseup', function(e){
-      pix.push(e.target);
-    });
+  }
 
-    console.log(pix);
-  }*/
-
-    // applies currentColor to pixel on click
-  /*function changeColor (  ){
-    var choose = document.addEventListener( 'click', function(e) {
-      if( e.target.className !== 'color' && e.target.id !== 'clear'){
-      currentPixel = e.target;
-      console.log('this pix' + currentPixel);
-      console.log(currentColor);
-      if(currentPixel.className === 'button'){
-      currentPixel.style.backgroundColor = currentColor;
-      }
-    }
-      // sets all elements with class button to white
-      if( e.target.id === 'clear' ){
-        (function() {
-          var elements;
-          elements = document.getElementsByClassName( 'button' );
-          for ( var i=0; i < elements.length; i++ ){
-            elements[i].style.backgroundColor = 'white';
-          }
-        })();
-
-
-      }
-
-  });
-
-  }*/
-  return{
+  return {
     createTableRow,
     colorDiv,
     createDiv,
-  //  changeColor,
     selectColor,
-  //  drag
-  };
+    stamp,
+   };
 }
 
 var render = pixelPainter();
 render.createTableRow();
 render.createDiv();
-//render.changeColor();
 render.selectColor();
 render.colorDiv();
-//render.drag();

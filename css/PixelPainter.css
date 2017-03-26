@@ -3,11 +3,16 @@ table {
 }
 
 button {
-  height: 1px;
-  width: 1px;
+  height: 20px;
+  width: 20px;
 }
 
 .color{
   height: 100px;
   width: 100px;
+}
+
+.stamp{
+  height: 100px;
+  widows: 100px;
 }
