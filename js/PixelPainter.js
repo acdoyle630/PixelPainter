@@ -222,8 +222,12 @@ function line(a,b){
         console.log(down);
         console.log(secondButton);
     }
-
-
+    for (var f =1 ; f< a.x - b.x; f++){
+      var right = document.getElementById(secondButton.id -(-1));
+      console.log(right);
+      right.style.backgroundColor = 'red';
+      secondButton = right;
+    }
   console.log(firstButton);
 }
 
