@@ -2,7 +2,7 @@ var grid = document.getElementById('pixelPainter');
 document.body.style.backgroundImage =  'http://hd-wall-papers.com/images/wallpapers/art-background/art-background-2.jpg';
 
 function pixelPainter() {
-  var size = 30;
+  var size = 13;
   var rows = 0;
   var currentPixel = null;
   currentColor = null;
@@ -64,58 +64,58 @@ function pixelPainter() {
     selected.style.backgroundColor = currentColor;
     newDiv.appendChild(selected);
 
-    var newButton = document.createElement( 'button' );
-    newButton.id = 'blue';
-    newButton.className = 'color';
-    newButton.style.backgroundColor = 'blue';
-    newButton.innerHTML = 'BLUE';
-    newDiv.appendChild(newButton);
+    var blueButton = document.createElement( 'button' );
+    blueButton.id = 'blue';
+    blueButton.className = 'color';
+    blueButton.style.backgroundColor = 'blue';
+    blueButton.innerHTML = 'BLUE';
+    newDiv.appendChild(blueButton);
 
-    var newButton8 = document.createElement( 'button' );
-    newButton8.id = 'black';
-    newButton8.className = 'color';
-    newButton8.style.backgroundColor = 'black';
-    newButton8.innerHTML = 'BLACK';
-    newDiv.appendChild(newButton8);
+    var blackButton = document.createElement( 'button' );
+    blackButton.id = 'black';
+    blackButton.className = 'color';
+    blackButton.style.backgroundColor = 'black';
+    blackButton.innerHTML = 'BLACK';
+    newDiv.appendChild(blackButton);
 
-    var newButton2 = document.createElement( 'button' );
-    newButton2.id = 'red';
-    newButton2.className = 'color';
-    newButton2.style.backgroundColor ='red';
-    newButton2.innerHTML = 'RED';
-    newDiv2.appendChild(newButton2);
-    var newButton3 = document.createElement( 'button' );
-    newButton3.id = 'green';
-    newButton3.className = 'color';
-    newButton3.style.backgroundColor ='green';
-    newButton3.innerHTML = 'GREEN';
-    newDiv2.appendChild(newButton3);
-    var newButton4 = document.createElement( 'button' );
-    newButton4.id = 'transparent';
-    newButton4.className = 'color';
-    newButton4.style.backgroundColor ='ORange';
-    newButton4.innerHTML = 'MYSTERY';
-    newDiv2.appendChild(newButton4);
-    var newButton5 = document.createElement( 'button' );
-    newButton5.id = 'white';
-    newButton5.className = 'color';
-    newButton5.innerHTML = 'CLEAR';
-    newButton5.style.backgroundColor ='white';
-    newDiv3.appendChild(newButton5);
-    var newButton6 = document.createElement( 'button' );
-    newButton6.id = 'clear';
-    newButton6.className = 'color';
-    newButton6.innerHTML = 'CLEAR ALL';
-    newButton6.style.backgroundColor ='white';
-    newDiv3.appendChild(newButton6);
+    var redButton = document.createElement( 'button' );
+    redButton.id = 'red';
+    redButton.className = 'color';
+    redButton.style.backgroundColor ='red';
+    redButton.innerHTML = 'RED';
+    newDiv2.appendChild(redButton);
+    var greenButton = document.createElement( 'button' );
+    greenButton.id = 'green';
+    greenButton.className = 'color';
+    greenButton.style.backgroundColor ='green';
+    greenButton.innerHTML = 'GREEN';
+    newDiv2.appendChild(greenButton);
+    var mysteryButton = document.createElement( 'button' );
+    mysteryButton.id = 'transparent';
+    mysteryButton.className = 'color';
+    mysteryButton.style.backgroundColor ='ORange';
+    mysteryButton.innerHTML = 'MYSTERY';
+    newDiv2.appendChild(mysteryButton);
+    var whiteButton = document.createElement( 'button' );
+    whiteButton.id = 'white';
+    whiteButton.className = 'color';
+    whiteButton.innerHTML = 'CLEAR';
+    whiteButton.style.backgroundColor ='white';
+    newDiv3.appendChild(whiteButton);
+    var clearButton = document.createElement( 'button' );
+    clearButton.id = 'clear';
+    clearButton.className = 'color';
+    clearButton.innerHTML = 'CLEAR ALL';
+    clearButton.style.backgroundColor ='white';
+    newDiv3.appendChild(clearButton);
 
-    var newButton7 = document.createElement( 'button' );
-    newButton7.id = 'stamp';
-    newButton7.className = 'color';
-    newButton7.innerHTML = 'STAMP';
-    newButton7.style.backgroundColor ='white';
-    newDiv3.appendChild(newButton7);
-    newButton7.addEventListener('click', function(){
+    var stampButton = document.createElement( 'button' );
+    stampButton.id = 'stamp';
+    stampButton.className = 'color';
+    stampButton.innerHTML = 'STAMP';
+    stampButton.style.backgroundColor ='white';
+    newDiv3.appendChild(stampButton);
+    stampButton.addEventListener('click', function(){
       console.log('stamp' +stampOn);
       stampOn = !stampOn;
       console.log('stamo' + stampOn);
@@ -184,6 +184,49 @@ function unStamp(){
   });
 }
 
+function line(a,b){
+  a = {
+    x: a % size + 1,
+    y: Math.floor(1 + a / size)
+  };
+  b = {
+    x: b % size + 1,
+    y: Math.floor(1 + b / size)
+  };
+  var slope = (-(a.y - b.y) / (a.x - b.x));
+  console.log(a.x);
+  console.log(b.x);
+  console.log(a.y);
+  console.log(b.y);
+  console.log(slope);
+  var firstButton = document.getElementById(151);
+  var secondButton = document.getElementById(30);
+  firstButton.style.backgroundColor = 'red';
+  secondButton.style.backgroundColor = 'red';
+    for(var i=1; i <= a.y - b.y; i++){
+      var up = document.getElementById(firstButton.id - size);
+      up.style.backgroundColor = 'red';
+      firstButton = up;
+    }
+    for(var j = 1; j < a.x - b.x; j++) {
+      console.log(a.x - b.x);
+      var left = document.getElementById(firstButton.id -1);
+      left.style.backgroundColor = 'red';
+      firstButton = left;
+    }
+    for(var t=1; t <= a.y - b.y; t++){
+      var down = document.getElementById(secondButton.id  - (-(size)));
+      down.style.backgroundColor = 'red';
+      secondButton = down;
+        console.log(size);
+        console.log(down);
+        console.log(secondButton);
+    }
+
+
+  console.log(firstButton);
+}
+
 
   return {
     createTableRow,
@@ -191,7 +234,8 @@ function unStamp(){
     createDiv,
     selectColor,
     stamp,
-    unStamp
+    unStamp,
+    line
    };
 
 
@@ -202,3 +246,4 @@ render.createTableRow();
 render.createDiv();
 render.selectColor();
 render.colorDiv();
+render.line(151,30);
