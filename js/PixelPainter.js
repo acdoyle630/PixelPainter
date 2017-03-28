@@ -10,6 +10,7 @@ function pixelPainter() {
   var stampOn = false;
   var recStart;
   var recEnd;
+  var recMode = false;
 
   // creates buttons for div row
   function createTableRow( ){
@@ -117,7 +118,9 @@ function pixelPainter() {
     selectLines.innerHTML = 'rec';
     selectLines.style.backgroundColor ='white';
     newDiv3.appendChild(selectLines);
-    selectLines.addEventListener('click', selectLine());
+    selectLines.addEventListener('click', selectLine);
+    recMode = true;
+    console.log(recMode);
 
     var stampButton = document.createElement( 'button' );
     stampButton.id = 'stamp';
@@ -195,7 +198,9 @@ function unStamp(){
 }
 
 function selectLine(){
-  document.addEventListener('click', function(e){
+  console.log(recMode);
+  if(recMode === true){
+  grid.addEventListener('click', function(e){
     if (recStart >= 0){
     recEnd = Number(e.target.id);
     line(recStart,recEnd);
@@ -213,6 +218,7 @@ function selectLine(){
     console.log(recStart);
   line(recStart,recEnd);
   }*/
+  }
 }
 
 function line(a,b){
@@ -235,28 +241,32 @@ function line(a,b){
   }
   var firstButton = document.getElementById(aNumber);
   var secondButton = document.getElementById(bNumber);
-  firstButton.style.backgroundColor = 'red';
-  secondButton.style.backgroundColor = 'red';
+  firstButton.style.backgroundColor = currentColor;
+  secondButton.style.backgroundColor = currentColor;
     for(var i=1; i <= a.y - b.y; i++){
       var up = document.getElementById(firstButton.id - size);
-      up.style.backgroundColor = 'red';
+      up.style.backgroundColor = currentColor;
       firstButton = up;
     }
     for(var j = 1; j < a.x - b.x; j++) {
+  recMode = false;
       var left = document.getElementById(firstButton.id -1);
-      left.style.backgroundColor = 'red';
+      left.style.backgroundColor = currentColor;
       firstButton = left;
     }
     for(var t=1; t <= a.y - b.y; t++){
       var down = document.getElementById(secondButton.id  - (-(size)));
-      down.style.backgroundColor = 'red';
+      down.style.backgroundColor = currentColor;
       secondButton = down;
     }
     for (var f =1 ; f< a.x - b.x; f++){
       var right = document.getElementById(secondButton.id -(-1));
-      right.style.backgroundColor = 'red';
+      right.style.backgroundColor = currentColor;
       secondButton = right;
     }
+    recMode = false;
+    recStart = 0;
+    recEnd = 0;
 }
 
 
