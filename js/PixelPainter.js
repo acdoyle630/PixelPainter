@@ -8,6 +8,8 @@ function pixelPainter() {
   currentColor = null;
   var drag = false;
   var stampOn = false;
+  var recStart;
+  var recEnd;
 
   // creates buttons for div row
   function createTableRow( ){
@@ -109,6 +111,14 @@ function pixelPainter() {
     clearButton.style.backgroundColor ='white';
     newDiv3.appendChild(clearButton);
 
+    var selectLines = document.createElement( 'button' );
+    selectLines.id = 'line';
+    selectLines.className = 'color';
+    selectLines.innerHTML = 'rec';
+    selectLines.style.backgroundColor ='white';
+    newDiv3.appendChild(selectLines);
+    selectLines.addEventListener('click', selectLine());
+
     var stampButton = document.createElement( 'button' );
     stampButton.id = 'stamp';
     stampButton.className = 'color';
@@ -184,7 +194,31 @@ function unStamp(){
   });
 }
 
+function selectLine(){
+  document.addEventListener('click', function(e){
+    if (recStart >= 0){
+    recEnd = Number(e.target.id);
+    line(recStart,recEnd);
+      } else  {
+      recStart = undefined;
+      if(recStart === null || recStart === undefined){
+      recStart = Number(e.target.id);
+      }
+    }
+  console.log('start' +recStart);
+  console.log('end'+ recEnd);
+
+  });
+  /*if(recStart >=0 && recEnd>=0 ){
+    console.log(recStart);
+  line(recStart,recEnd);
+  }*/
+}
+
 function line(a,b){
+  var aNumber = Number(a);
+  var bNumber = Number(b);
+  console.log(aNumber);
   a = {
     x: a % size + 1,
     y: Math.floor(1 + a / size)
@@ -194,13 +228,13 @@ function line(a,b){
     y: Math.floor(1 + b / size)
   };
   var slope = (-(a.y - b.y) / (a.x - b.x));
-  console.log(a.x);
-  console.log(b.x);
-  console.log(a.y);
-  console.log(b.y);
   console.log(slope);
-  var firstButton = document.getElementById(151);
-  var secondButton = document.getElementById(30);
+  if(b.x > a.x) {
+    aNumber = Number(b);
+    bNumber = Number(a);
+  }
+  var firstButton = document.getElementById(aNumber);
+  var secondButton = document.getElementById(bNumber);
   firstButton.style.backgroundColor = 'red';
   secondButton.style.backgroundColor = 'red';
     for(var i=1; i <= a.y - b.y; i++){
@@ -209,7 +243,6 @@ function line(a,b){
       firstButton = up;
     }
     for(var j = 1; j < a.x - b.x; j++) {
-      console.log(a.x - b.x);
       var left = document.getElementById(firstButton.id -1);
       left.style.backgroundColor = 'red';
       firstButton = left;
@@ -218,17 +251,12 @@ function line(a,b){
       var down = document.getElementById(secondButton.id  - (-(size)));
       down.style.backgroundColor = 'red';
       secondButton = down;
-        console.log(size);
-        console.log(down);
-        console.log(secondButton);
     }
     for (var f =1 ; f< a.x - b.x; f++){
       var right = document.getElementById(secondButton.id -(-1));
-      console.log(right);
       right.style.backgroundColor = 'red';
       secondButton = right;
     }
-  console.log(firstButton);
 }
 
 
@@ -239,7 +267,8 @@ function line(a,b){
     selectColor,
     stamp,
     unStamp,
-    line
+    line,
+    selectLine
    };
 
 
@@ -250,4 +279,4 @@ render.createTableRow();
 render.createDiv();
 render.selectColor();
 render.colorDiv();
-render.line(151,30);
+//render.line(56,0);
